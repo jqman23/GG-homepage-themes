@@ -217,6 +217,11 @@ function getRow(index) {
   return Math.floor(index / 3) + 1;
 }
 
+function reportHeight() {
+  const h = document.documentElement.scrollHeight;
+  parent.postMessage({ ggWidgetHeight: h }, "*");
+}
+
 boxes.forEach(box => {
   box.addEventListener("click", () => {
     trackClick(box.getAttribute("data-track"));
@@ -232,6 +237,10 @@ boxes.forEach(box => {
     spots[row - 1].appendChild(card);
 
     card.style.display = "block";
+    reportHeight();
   });
 });
+
+window.addEventListener("load", reportHeight);
+window.addEventListener("resize", reportHeight);
 </script>
