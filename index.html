@@ -88,7 +88,10 @@
   <h3 id="themeCardTitle"></h3>
   <p id="themeCardText"></p>
   <div id="themeExamplesWrap">
-    <div id="themeExamplesLabel">Featured sessions</div>
+    <div id="themeExamplesLabel">
+      Featured sessions
+      <a id="themeSessionsLink" href="https://cvent.me/gWRQNB" target="_blank" rel="noopener" aria-label="Learn more about sessions" title="Learn more about sessions">i</a>
+    </div>
     <ul id="themeExamples"></ul>
   </div>
 </div>
@@ -191,12 +194,40 @@ body::-webkit-scrollbar {
   }
 
   #themeExamplesLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     margin-bottom: 6px;
     font-size: 0.82rem;
     font-weight: 600;
     color: #122345;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+  }
+
+  #themeSessionsLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    color: #122345;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: none;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+
+  #themeSessionsLink:hover,
+  #themeSessionsLink:focus-visible {
+    background: var(--theme-accent, #187089);
+    border-color: var(--theme-accent, #187089);
+    color: #ffffff;
+    outline: none;
   }
 
   #themeExamples {
@@ -287,6 +318,7 @@ boxes.forEach(box => {
     const row = getRow(index);
 
     header.style.background = box.getAttribute("data-color");
+    card.style.setProperty("--theme-accent", box.getAttribute("data-color"));
     title.textContent = box.getAttribute("data-title");
     text.textContent = box.getAttribute("data-text");
     updateExamples(box);
